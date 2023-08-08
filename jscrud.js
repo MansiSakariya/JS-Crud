@@ -7,8 +7,6 @@ const randertable = () => {
         studentinfo.map((item, index) =>
             `<tr>
         <td>${item.fname}</td>
-        <td>${item.mname}</td>
-        <td>${item.lname}</td>
         <td>${item.gender}</td>
         <td>${item.email}</td>
         <td>${item.psw}</td>
@@ -27,8 +25,6 @@ const editdata = (index) => {
     let editrecord = studentinfo.find((item, index1) => { return index1 === index });
     console.log("editrecord", editrecord);
     document.getElementById('fname').value = editrecord.fname
-    document.getElementById('mname').value = editrecord.mname
-    document.getElementById('lname').value = editrecord.lname
     document.getElementById('email').value = editrecord.email
     document.getElementById('psw').value = editrecord.psw
     document.getElementById('add').value = editrecord.add
@@ -37,8 +33,6 @@ const editdata = (index) => {
 
 function myfun() {
     let firstname = document.getElementById('fname').value
-    let middlename = document.getElementById('mname').value
-    let lastname = document.getElementById('lname').value
     let gender = '';
     if (document.getElementById('female').checked) {
         gender += document.getElementById("female").value
@@ -59,8 +53,8 @@ function myfun() {
     }
 
     studentdata = {
-        fname: firstname, mname: middlename, lname: lastname, gender: gender, email: email,
-        psw: password, add: address, phone: phonenumber,box:box
+        fname: firstname, gender: gender, email: email,
+        psw: password, add: address, phone: phonenumber, box: box
     }
     console.log("studentdata", studentdata);
 
@@ -97,7 +91,7 @@ function myfun() {
 
 function search() {
     const student = document.getElementById('search').value
-    let searchdata = studentinfo.filter((item) => item.fname === student);
+    let searchdata = studentinfo.filter((item) => item.fname === student || item.email === student || item.add === student);
     studentinfo = searchdata
     randertable();
 }
@@ -116,8 +110,26 @@ const deletedata = (index) => {
 
 function sort() {
     let sortdata = studentinfo.sort((a, b) => a.fname.localeCompare(b.fname));
-    studentinfo = sortdata;
+    studentinfo = sortdata
     console.log("sortdata", sortdata);
     randertable()
+}
+function sorting() {
+    let sortdata = studentinfo.sort((a, b) => a.add.localeCompare(b.add));
+    console.log("sortdata", sortdata);
+    studentinfo = sortdata;
+    randertable();
+}
+function sortrecord() {
+    let sortdata = studentinfo.sort((a, b) => a.email.localeCompare(b.email));
+    console.log("sortdata", sortdata);
+    studentinfo = sortdata;
+    randertable();
+}
+function sortdata() {
+    let sortdata = studentinfo.sort((a, b) => a.gender.localeCompare(b.gender));
+    console.log("sortdata", sortdata);
+    studentinfo = sortdata;
+    randertable();
 }
 randertable();
